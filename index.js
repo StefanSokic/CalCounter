@@ -39,9 +39,9 @@ app.post('/webhook/', function (req, res) {
    		if (event.message.attachments) {
     		//Checking if there are any image attachments 
     		if(event.message.attachments[0].type === "image"){
-     		//	var imageURL = attachments[0].payload.url;
-     		//	sendTextMessage(sender, imageURL)
-     			sendTextMessage(sender, "okay thats a picture")
+     			var imageURL = event.message.attachments[0].payload.url;
+     			sendTextMessage(sender, imageURL)
+     		//	sendTextMessage(sender, "okay thats a picture")
     		}
    		}
    		//used for outputting text right now
