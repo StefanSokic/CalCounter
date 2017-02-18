@@ -37,7 +37,8 @@ app.post('/webhook/', function (req, res) {
 		sender = event.sender.id
 		if (event.message && event.message.text) {
 			text = event.message.text
-			sendTextMessage(sender, "you're fried" + event) //text.substring(0, 200))
+			img = event.message.attachments[0].url
+			sendTextMessage(sender, "you're fried" + img) //text.substring(0, 200))
 		}
 	}
 	res.sendStatus(200)
