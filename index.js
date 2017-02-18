@@ -40,8 +40,7 @@ app.post('/webhook/', function (req, res) {
     		//Checking if there are any image attachments 
     		if(event.message.attachments[0].type === "image"){
      			var imageURL = event.message.attachments[0].payload.url;
-     			sendTextMessage(sender, imageURL)
-     		//	sendTextMessage(sender, "okay thats a picture")
+     			sendImageMessage(sender, imageURL)
     		}
    		}
    		//used for outputting text right now
@@ -76,3 +75,31 @@ function sendTextMessage(sender, text) {
 			}
 	})
 }
+
+//Adding function to echo back images
+function sendImageMessage(sender, imageURL) {
+	messageData = {
+		"attachment":{
+      		"type":"image",
+      		"payload":{
+        		"url": imageURL
+      		}
+    	}
+	}
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}}, 
+		function(error, response, body) {
+			if (error) {
+				console.log('Error sending messages: ', error)
+			} else if (response.body.error) {
+				console.log('Error: ', response.body.error)
+			}
+	})
+}
+
