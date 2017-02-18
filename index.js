@@ -46,7 +46,6 @@ app.post('/webhook/', function (req, res) {
    		//used for outputting text right now
 		else if (event.message && event.message.text) {
 			text = event.message.text
-			//img = event.message.attachments[0].payload.url
 			sendTextMessage(sender, text + " I can has so many dreams woa") //text.substring(0, 200))
 		}
 	}
@@ -65,6 +64,7 @@ function sendTextMessage(sender, text) {
 		method: 'POST',
 		json: {
 			recipient: {id:sender},
+			"sender_action":"typing_on",
 			message: messageData,
 		}}, 
 		function(error, response, body) {
@@ -92,6 +92,7 @@ function sendImageMessage(sender, imageURL) {
 		method: 'POST',
 		json: {
 			recipient: {id:sender},
+			"sender_action":"typing_on",
 			message: messageData,
 		}}, 
 		function(error, response, body) {
