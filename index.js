@@ -35,7 +35,16 @@ app.post('/webhook/', function (req, res) {
 	for (i = 0; i < messaging_events.length; i++) {
 		event = req.body.entry[0].messaging[i]
 		sender = event.sender.id
-		if (event.message && event.message.text) {
+		//Checking for attachments
+   		if (event.message.attachments) {
+    		//Checking if there are any image attachments 
+    		if(atts[0].type === "image"){
+     			var imageURL = atts[0].payload.url;
+     			sendTextMessage(sender, imageURL)
+    		}
+   		}
+   		//used for outputting text right now
+		else if (event.message && event.message.text) {
 			text = event.message.text
 			//img = event.message.attachments[0].payload.url
 			sendTextMessage(sender, text + " I can has so many dreams woa") //text.substring(0, 200))
