@@ -111,7 +111,7 @@ function generateHaiku(sender, array) {
 
 	// generate all word arrays------------------
 	adjectives = create2dArray(adjectivesList = ["abandoned", "advanced", "blank", "blue", "devillishly", "cloudy", "sad", "meatiest", "cooler", "interesting", "identical", "ill", "right", "wrong", "fun", "conservative", "mushiest", "chunkier", "funkiest", "silly", "slobbery", "naughty", "glorious", "deficient", "incompetent", "benevolent", "wise", "damp", "mini", "dense", "early", "groggy","hip", "radical", "vestigal"]);
-	adverbs = create2dArray(adverbsList =["financially", "willfuly", "firmly", "immensely", "truthfully", "quickly", "rarely", "best", "honestly"]);
+	adverbs = create2dArray(adverbsList =["financially", "willfuly", "firmly", "immensely", "truthfully", "quickly", "rarely", "best", "honestly", "swiftly", "majestically", "tenderly", "therefore", "eventually", "instead", "obviously", "daily", "nowhere"]);
 	pronouns = create2dArray(pronounsList = ["I", "you", "it", "they", "he", "she"]);
 	verbs = create2dArray(verbsList = ["as", "is", "celebrating", "congratulates", "minimizes", "vocalize", "murdering", "carressing", "was", "has", "got", "made", "said", "took", "jumping", "crying", "hugging", "screaming", "consoling", "traumatizing", "concentrates", "highlights", "enunciates", "muttering", "cuddling", "whispers", "cry", "dug", "munches", "boogieing", "mingles", "boasts", "perishes"]);
 	questionWords = create2dArray(questionWordsList = ["who", "what", "when", "where", "why"]);
