@@ -218,7 +218,7 @@ function generateHaiku(sender, array) {
 
 		while(true){
 			var placeholder = verbs[Math.floor(Math.random() * verbs.length)];
-			if (placeholder[1] == (syllablesRemainingLine1 - 3)) {
+			if (placeholder[1] <= (syllablesRemainingLine1 - 3)) {
 				verb1 = placeholder;
 				break;
 			}
