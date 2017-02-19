@@ -2,7 +2,10 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var request = require('request')
 var syllable = require('syllable');
-var app = express()
+var app = express();
+
+var spawn = require('child_process').spawn,
+ py    = spawn('python', ['main.py']);
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -58,7 +61,7 @@ var token = "EAAH4wv1b3eIBAKQzcA9ZAafSz6UJBi5FdNnMPPsKPBmEVSH9ijU9tXZAPc6aqsHrXR
 //Adding function to echo back messages
 function sendTextMessage(sender, text) {
 	messageData = {
-		text: "wooha" + text
+		text: text
 	}
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -90,13 +93,25 @@ function analyzePicture(sender, url) {
   	function(response) {
   		var wordArray =[];
   		var i = 0;
-  		while (wordArray.length < 5) {
+  		while (i < 3) {
   			if (response.outputs[0].data.concepts[i].name != "no person") {
-				wordArray.append([response.outputs[0].data.concepts[i].name, syllable(response.outputs[0].data.concepts[i].name)])
+				//wordArray.append([response.outputs[0].data.concepts[i].name, syllable(response.outputs[0].data.concepts[i].name)])
+  				sendTextMessage(sender, "I see a " + response.outputs[0].data.concepts[i].name);
+  				i++;
   			}
-  			i++;
   		}
-  		sendTextMessage(sender, "I see a " + wordArray[0]);
+  		//sendTextMessage(sender, "I see a " + wordArray[0]);
+  		/*
+  		py.stdout.on('data', function(data){
+  			dataString += data.toString();
+		});
+		py.stdout.on('end', function(){
+  			console.log('Sum of numbers=',dataString);
+		});
+		py.stdin.write(JSON.stringify(data));
+		py.stdin.end();
+		*/
+
   	},
   	function(err) {
     	console.error(err);
