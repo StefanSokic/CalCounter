@@ -58,7 +58,7 @@ var token = "EAAH4wv1b3eIBAKQzcA9ZAafSz6UJBi5FdNnMPPsKPBmEVSH9ijU9tXZAPc6aqsHrXR
 //Adding function to echo back messages
 function sendTextMessage(sender, text) {
 	messageData = {
-		text: text
+		text: "wooha" + text
 	}
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -96,7 +96,7 @@ function analyzePicture(sender, url) {
   			}
   			i++;
   		}
-  		sendTextMessage(sender, "I see a " + wordArray);
+  		sendTextMessage(sender, "I see a " + wordArray[0]);
   	},
   	function(err) {
     	console.error(err);
