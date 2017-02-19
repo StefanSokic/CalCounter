@@ -92,12 +92,13 @@ function analyzePicture(sender, url) {
 	app.models.predict(Clarifai.GENERAL_MODEL, url).then(
   	function(response) {
   		var wordArray =[];
-  		for (var i = 0; i < 5; i++) {
+  		for (var i = 0; wordArray.length < 3; i++) {
   			if (response.outputs[0].data.concepts[i].name != "no person"){
-  				sendTextMessage(sender, "I see a " + response.outputs[0].data.concepts[i].name);
+  				wordArray.push([response.outputs[0].data.concepts[i].name, syllable(response.outputs[0].data.concepts[i].name)]);
   			}
   		}
-  		//sendTextMessage(sender, "I see a " + wordArray[0]);
+  		sendTextMessage(sender, generateHaiku(sender, wordArray););
+  		//sendTextMessage(sender, "I see a " + response.outputs[0].data.concepts[i].name);
   		/*
   		py.stdout.on('data', function(data){
   			dataString += data.toString();
@@ -114,5 +115,93 @@ function analyzePicture(sender, url) {
     	console.error(err);
   	}
 	);
+}
+
+function generateHaiku(sender, array) {
+	// array is a 2d array. Each inner array conatins the world followed by the amount of syllables
+
+	// generate all word arrays------------------
+	adjectives = create2dArray(adjectivesList = []);
+	adverbs = create2dArray(adverbsList =[]);
+	pronouns = create2dArray(pronounsList = []);
+	verbs = create2dArray(verbsList = []);
+	questionWords = create2dArray(questionWordsList = []);
+	prepositions = create2dArray(prepositionsList = []);
+	nouns = create2dArray(nounsList = []);
+
+	function create2dArray(list) {
+		newArray = [];
+		for (var i = 0; i < list.length; i++) {
+		newArray.push([list[i], syllable(list[i])])
+		}
+		return newArray;
+	}
+	//---------------------------------------------
+// initiate all of the variables
+	var noun1 = "";
+	var adjective1 = "";
+	var noun2 = "";
+	var preposition2 = "";
+	var adjective2 = "";
+	var verb2 = "";
+	var adverb3 = "";
+
+	// generate the first line, syll count of 5
+	var syllablesRemainingLine1 = 5;
+	noun1 = array[0];
+	// decrement the syllable counter
+	syllablesRemainingLine1 = syllablesRemainingLine1 - noun1[1];
+	
+	while(true){
+		var placeholder = adjectives[Math.floor(Math.random() * adjectives.length)];
+		if (placeholder[1] == syllablesRemainingLine1) {
+			adjective1 = placeholder;
+			break;
+		}
+	}
+	console.log(adjective1[0], noun1[0]);
+
+	//generage the second line, syll count of 7
+	syllablesRemainingLine2 = 7;
+
+	noun2 = array[1];
+	syllablesRemainingLine2 = syllablesRemainingLine2 - noun2[1];
+
+	preposition2 = prepositions[Math.floor(Math.random() * prepositions.length)];
+	syllablesRemainingLine2 = syllablesRemainingLine2 - preposition2[1];
+	
+	while(true){
+		var placeholder = adjectives[Math.floor(Math.random() * adjectives.length)];
+		if ((placeholder[1] <= (syllablesRemainingLine2 - 2)) && (placeholder != adjective1) ) {
+			adjective2 = placeholder;
+			break;
+		}
+	}
+	syllablesRemainingLine2 = syllablesRemainingLine2 - adjective2[1];
+
+	while(true){
+		var placeholder = verbs[Math.floor(Math.random() * verbs.length)];
+		if (placeholder[1] == syllablesRemainingLine2) {
+			verb2 = placeholder;
+			break;
+		}
+	}
+	console.log(preposition2[0], adjective2[0], noun2[0], verb2[0]);
+
+	//generate the thrid line, syll count of 5
+	syllablesRemainingLine3 = 5;
+	adverb3 = adverbs[Math.floor(Math.random() * adverbs.length)];
+	syllablesRemainingLine3 = syllablesRemainingLine3 - adverb3[1];
+
+	while(true){
+		var placeholder = verbs[Math.floor(Math.random() * verbs.length)];
+		if (placeholder[1] == syllablesRemainingLine3) {
+			verb3 = placeholder;
+			break;
+		}
+	}
+	console.log(verb3[0], adverb3[0]);
+
+	return "" + adjective1[0] + " " + noun1[0] + "\n" + preposition2[0] + " " + adjective2[0] + " " + noun2[0] + " " + verb2[0] + "\n" + verb3[0] + " " + adverb3[0];
 }
 
