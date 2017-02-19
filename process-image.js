@@ -8,8 +8,8 @@ var debug = function() {
 
 // params
 var filter = 'art_deco';
-//var pwd = '/Users/stefansokic/Documents/Projects/CalCounter/city2.png';
-var filename = "http://vignette2.wikia.nocookie.net/arrow/images/3/3e/Star_City.png/revision/latest?cb=20121011225746"; //pwd; //+ process.argv[2];
+var pwd = '/Users/stefansokic/Documents/Projects/CalCounter/city2.png';
+var filename = pwd; //+ process.argv[2];//"image=@http://vignette2.wikia.nocookie.net/arrow/images/3/3e/Star_City.png/revision/latest?cb=20121011225746";
 var outputFilename = path.join(path.dirname(filename), path.basename(filename, '.jpg') + path.extname(filename));
 var url = 'https://dreamscopeapp.com/api/images';
 //var count = process.argv[3];
@@ -21,7 +21,7 @@ get_photo = function(){
   request
   .post(url)                 //this is a POST req
   .field('filter', filter)  // the 'filter' param
-  .attach(filename) //attach file as 'image'
+  .attach('image', filename) //attach file as 'image'
   .end(function(err, res) {  //callback on response
     if (err) return console.log(err);
     debug(res.headers);
@@ -37,15 +37,15 @@ get_photo = function(){
           var body = res.body;
           // check if process finished
           if (body.processing_status == 2 && body.filtered_url) {
-            //console.log('Ping!');
-            console.log("poll url " + poll_url);
-            console.log(body.filtered_url)
+            console.log('Ping!');
+            console.log(body.filtered_url);
+            //console.log("poll_url: " + poll_url);
             //console.log('Downloading image...');
             // download image and save to file
             request.get(body.filtered_url)
               .pipe(fs.createWriteStream(outputFilename))
               .on('finish', function() {
-                //console.log('Wrote ' + outputFilename);
+                console.log('Wrote ' + outputFilename);
               });
           } else {
             // still processing, check again
@@ -59,11 +59,11 @@ get_photo = function(){
       });
     };
     // Start polling
-    //process.stdout.write('Processing...');
+    process.stdout.write('Processing...');
     poll();
   });
 };
-
+/*
 photo_loop = function(){
   var count = 1
   if (Number(process.argv[3]))
@@ -72,6 +72,6 @@ photo_loop = function(){
     get_photo();
   };
 };
-
-photo_loop();
-//get_photo();
+*/
+//photo_loop();
+get_photo();
