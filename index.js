@@ -56,7 +56,7 @@ var token = "EAAH4wv1b3eIBAKQzcA9ZAafSz6UJBi5FdNnMPPsKPBmEVSH9ijU9tXZAPc6aqsHrXR
 //Adding function to echo back messages
 function sendTextMessage(sender, text) {
 	messageData = {
-		text: "woo" + text
+		text: text
 	}
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -74,34 +74,7 @@ function sendTextMessage(sender, text) {
 			}
 	})
 }
-/*
-//Adding function to echo back images
-function sendImageMessage(sender, imageURL) {
-	messageData = {
-		"attachment":{
-      		"type":"image",
-      		"payload":{
-        		"url": imageURL
-      		}
-    	}
-	}
-	request({
-		url: 'https://graph.facebook.com/v2.6/me/messages',
-		qs: {access_token:token},
-		method: 'POST',
-		json: {
-			recipient: {id:sender},
-			message: messageData,
-		}}, 
-		function(error, response, body) {
-			if (error) {
-				console.log('Error sending messages: ', error)
-			} else if (response.body.error) {
-				console.log('Error: ', response.body.error)
-			}
-	})
-}
-*/
+
 function analyzePicture(sender, url) {
 	//Require the client
 	var Clarifai = require('clarifai');
@@ -114,7 +87,7 @@ function analyzePicture(sender, url) {
 	// predict the contents of an image by passing in a url
 	app.models.predict(Clarifai.GENERAL_MODEL, url).then(
   	function(response) {
-    	sendTextMessage(sender, response.outputs[0].data); //.outputs[0].data
+    	sendTextMessage(sender, "I see a " + response.outputs[0].data.concepts[0].name); //.outputs[0].data
   	},
   	function(err) {
     	console.error(err);
