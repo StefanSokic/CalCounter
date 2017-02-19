@@ -108,9 +108,7 @@ function analyzePicture(sender, url) {
 
 function generateHaiku(sender, array) {
 	// array is a 2d array. Each inner array conatins the world followed by the amount of syllables
-
-	// generate all word arrays------------------
-	adjectives = create2dArray(adjectivesList = ["abandoned", "advanced", "fried", "blank", "blue", "devillishly", "cloudy", "sad", "meatiest", "cooler", "interesting", "identical", "ill", "right", "wrong", "fun", "conservative", "mushiest", "chunkier", "funkiest", "silly", "slobbery", "naughty", "glorious", "deficient", "incompetent", "benevolent", "wise", "damp", "mini", "dense", "early", "groggy","hip", "radical", "vestigal"]);
+	adjectives = create2dArray(adjectivesList = ["abandoned", "advanced", "fried up good", "blank", "blue", "devillish", "cloudy", "sad", "meatiest", "cooler", "interesting", "identical to him", "ill", "right", "wrong", "fun as heck", "conservative", "mushiest", "chunkier", "funkiest", "silly", "slobbery", "naughty", "glorious", "deficient", "incompetent", "benevolent", "wise", "damp", "mini", "dense", "early", "groggy","hip", "radical", "vestigal"]);
 	adverbs = create2dArray(adverbsList =["financially", "willfuly", "firmly", "immensely", "truthfully", "quickly", "rarely", "best", "honestly", "swiftly", "majestically", "tenderly", "therefore", "eventually", "instead", "obviously", "daily", "nowhere"]);
 	pronouns = create2dArray(pronounsList = ["I", "you", "it", "they", "he", "she"]);
 	verbs = create2dArray(verbsList = ["as", "is", "celebrating", "congratulates", "minimizes", "vocalize", "murdering", "caressing", "was", "has", "got", "made", "said", "took", "jumping", "crying", "hugging", "screaming", "consoling", "traumatizing", "concentrates", "highlights", "enunciates", "muttering", "cuddling", "whispers", "cry", "dug", "munches", "boogieing", "mingles", "boasts", "perishes"]);
@@ -124,8 +122,8 @@ function generateHaiku(sender, array) {
 		}
 		return newArray;
 	}
-	//---------------------------------------------
-// initiate all of the variables
+
+	// initiate all of the variables
 	var noun1 = "";
 	var adjective1 = "";
 	var noun2 = "";
@@ -146,7 +144,6 @@ function generateHaiku(sender, array) {
 	}
 
 	function haiku1(sender, array) { 
-		console.log("haiku 1 bad");
 		// generate the first line, syll count of 5
 		var syllablesRemainingLine1 = 5;
 		noun1 = array[0];
@@ -161,7 +158,6 @@ function generateHaiku(sender, array) {
 			}
 		}
 		console.log(adjective1[0], noun1[0]);
-
 		//generage the second line, syll count of 7
 		syllablesRemainingLine2 = 7;
 
@@ -211,7 +207,6 @@ function generateHaiku(sender, array) {
 
 
 	function haiku2(sender, array) {
-		console.log("haiku 2 bad");
 		//start of first line
 		syllablesRemainingLine1 = 5;
 		
@@ -269,8 +264,6 @@ function generateHaiku(sender, array) {
 		console.log(noun3[0], "is ", adjective2[0], "?")	
 
 		return "" + noun1[0] + " " + verb1[0] + " " + adverb1[0] + "\n" + "and " + noun2[0] + " is " + adjective1[0] + "\n" + noun3[0] + " is " + adjective2[0] + "?"; 
-
-
 	}
 }
 
