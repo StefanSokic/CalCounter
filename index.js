@@ -121,7 +121,7 @@ function sendTextMessage(sender, text) {
 
 //Adding function to echo back images
 function sendImageMessage(sender, imageURL) {
-	upload(imageURL)
+	imageURL = upload(imageURL)
 	messageData = {
 		"attachment":{
       		"type":"image",
