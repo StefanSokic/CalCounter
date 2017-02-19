@@ -11,53 +11,38 @@ app.set('port', (process.env.PORT || 5000))
  */
 const S3_BUCKET = process.env.S3_BUCKET;
 
+var fs = require('fs');
+exports.upload = function (req, res) {
+    var file = req.files.file;
+    fs.readFile(file.path, function (err, data) {
+        if (err) throw err; // Something went wrong!
+        var s3bucket = new AWS.S3({params: {Bucket: 'deep-dream-image-db'}});
+        s3bucket.createBucket(function () {
+            var params = {
+                Key: file.originalFilename, //file.name doesn't exist as a property
+                Body: data
+            };
+            s3bucket.upload(params, function (err, data) {
+                // Whether there is an error or not, delete the temp file
+                fs.unlink(file.path, function (err) {
+                    if (err) {
+                        console.error(err);
+                    }
+                    console.log('Temp File Delete');
+                });
 
-/*
- * Respond to GET requests to /account.
- * Upon request, render the 'account.html' web page in views/ directory.
- */
-app.get('/account', (req, res) => res.render('account.html'));
-
-/*
- * Respond to GET requests to /sign-s3.
- * Upon request, return JSON containing the temporarily-signed S3 request and
- * the anticipated URL of the image.
- */
-app.get('/sign-s3', (req, res) => {
-  const s3 = new aws.S3();
-  const fileName = req.query['file-name'];
-  const fileType = req.query['file-type'];
-  const s3Params = {
-    Bucket: S3_BUCKET,
-    Key: fileName,
-    Expires: 60,
-    ContentType: fileType,
-    ACL: 'public-read'
-  };
-
-  s3.getSignedUrl('putObject', s3Params, (err, data) => {
-    if(err){
-      console.log(err);
-      return res.end();
-    }
-    const returnData = {
-      signedRequest: data,
-      url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
-    };
-    res.write(JSON.stringify(returnData));
-    res.end();
-  });
-});
-
-/*
- * Respond to POST requests to /submit_form.
- * This function needs to be completed to handle the information in
- * a way that suits your application.
- */
-app.post('/save-details', (req, res) => {
-  // TODO: Read POSTed form data and do something useful
-});
-
+                console.log("PRINT FILE:", file);
+                if (err) {
+                    console.log('ERROR MSG: ', err);
+                    res.status(500).send(err);
+                } else {
+                    console.log('Successfully uploaded data');
+                    res.status(200).end();
+                }
+            });
+        });
+    });
+};
 
 //---------------------------------------------------------------------------------------------------
 
