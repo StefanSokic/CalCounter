@@ -22,7 +22,7 @@ exports.upload = function (req, res) {
                 Key: file.originalFilename, //file.name doesn't exist as a property
                 Body: data
             };
-            s3bucket.upload(params, function (err, data) {
+            s3bucket.upload(params, function (err,  {
                 // Whether there is an error or not, delete the temp file
                 fs.unlink(file.path, function (err) {
                     if (err) {
