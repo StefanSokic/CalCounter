@@ -93,22 +93,11 @@ function analyzePicture(sender, url) {
   	function(response) {
   		var wordArray =[];
   		for (var i = 0; wordArray.length < 3; i++) {
-  			if (response.outputs[0].data.concepts[i].name != "no person"){
+  			if ((response.outputs[0].data.concepts[i].name != "no person") || (syllable(response.outputs[0].data.concepts[i].name) >= 5)){
   				wordArray.push([response.outputs[0].data.concepts[i].name, syllable(response.outputs[0].data.concepts[i].name)]);
   			}
   		}
   		sendTextMessage(sender, generateHaiku(sender, wordArray));
-  		//sendTextMessage(sender, "I see a " + response.outputs[0].data.concepts[i].name);
-  		/*
-  		py.stdout.on('data', function(data){
-  			dataString += data.toString();
-		});
-		py.stdout.on('end', function(){
-  			console.log('Sum of numbers=',dataString);
-		});
-		py.stdin.write(JSON.stringify(data));
-		py.stdin.end();
-		*/
 
   	},
   	function(err) {
