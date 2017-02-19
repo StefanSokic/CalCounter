@@ -110,11 +110,11 @@ function generateHaiku(sender, array) {
 	// array is a 2d array. Each inner array conatins the world followed by the amount of syllables
 
 	// generate all word arrays------------------
-	adjectives = create2dArray(adjectivesList = ["abandoned", "advanced", "blank", "blue", "devillishly", "cloudy", "sad", "meatiest", "cooler", "interesting", "identical", "ill", "right", "wrong", "fun", "conservative", "mushiest", "chunkier", "funkiest", "silly", "slobbery", "naughty", "glorious", "deficient", "incompetent", "benevolent", "wise", "damp", "mini", "dense", "early", "groggy","hip", "radical", "vestigal"]);
+	adjectives = create2dArray(adjectivesList = ["abandoned", "advanced", "fried", "blank", "blue", "devillishly", "cloudy", "sad", "meatiest", "cooler", "interesting", "identical", "ill", "right", "wrong", "fun", "conservative", "mushiest", "chunkier", "funkiest", "silly", "slobbery", "naughty", "glorious", "deficient", "incompetent", "benevolent", "wise", "damp", "mini", "dense", "early", "groggy","hip", "radical", "vestigal"]);
 	adverbs = create2dArray(adverbsList =["financially", "willfuly", "firmly", "immensely", "truthfully", "quickly", "rarely", "best", "honestly", "swiftly", "majestically", "tenderly", "therefore", "eventually", "instead", "obviously", "daily", "nowhere"]);
 	pronouns = create2dArray(pronounsList = ["I", "you", "it", "they", "he", "she"]);
-	verbs = create2dArray(verbsList = ["as", "is", "celebrating", "congratulates", "minimizes", "vocalize", "murdering", "carressing", "was", "has", "got", "made", "said", "took", "jumping", "crying", "hugging", "screaming", "consoling", "traumatizing", "concentrates", "highlights", "enunciates", "muttering", "cuddling", "whispers", "cry", "dug", "munches", "boogieing", "mingles", "boasts", "perishes"]);
-	questionWords = create2dArray(questionWordsList = ["who", "what", "when", "where", "why"]);
+	verbs = create2dArray(verbsList = ["as", "is", "celebrating", "congratulates", "minimizes", "vocalize", "murdering", "caressing", "was", "has", "got", "made", "said", "took", "jumping", "crying", "hugging", "screaming", "consoling", "traumatizing", "concentrates", "highlights", "enunciates", "muttering", "cuddling", "whispers", "cry", "dug", "munches", "boogieing", "mingles", "boasts", "perishes"]);
+	questions = create2dArray(questionWordsList = ["who", "what", "when", "where", "why"]);
 	prepositions = create2dArray(prepositionsList = ["the", "a", "that", "this", "is", "her", "an", "his"]);
 
 	function create2dArray(list) {
@@ -134,9 +134,16 @@ function generateHaiku(sender, array) {
 	var verb2 = "";
 	var adverb3 = "";
 	var noun3 = "";
+	var adverb1 = "";
+	var question1 = "";
+	var adjective3 = "";
+	var verb3 = "";
 
-
-	return haiku1(sender, array);
+	if (Math.floor(Math.random() == 0) {
+		return haiku1(sender, array);
+	} else {
+		return haiku2(sender, array);
+	}
 
 	function haiku1(sender, array) { 
 		// generate the first line, syll count of 5
@@ -199,6 +206,64 @@ function generateHaiku(sender, array) {
 		console.log(noun3[0], verb3[0]);
 
 		return "" + adjective1[0] + " " + noun1[0] + "\n" + preposition2[0] + " " + adjective2[0] + " " + noun2[0] + " " + verb2[0] + "\n" + noun3[0] + " " + verb3[0];
+	}
+	function haiku2(sender, array) {
+		//start of first line
+		syllablesRemainingLine1 = 5;
+		
+		noun1 = array[0];
+		syllablesRemainingLine1 = syllablesRemainingLine1 - noun1[1];
+
+		while(true){
+			var placeholder = verbs[Math.floor(Math.random() * verbs.length)];
+			if (placeholder[1] == (syllablesRemainingLine1 - 3)) {
+				verb1 = placeholder;
+				break;
+			}
+		} 
+		syllablesRemainingLine1 = syllablesRemainingLine1 - verb1[1];
+
+		while(true){
+			var placeholder = adverbs[Math.floor(Math.random() * adverbs.length)];
+			if (placeholder[1] == (syllablesRemainingLine1)) {
+				adverb1 = placeholder;
+				break;
+			}
+		} 		
+
+		console.log(noun1[0], verb1[0], adverb1[0]);
+
+		// start on second line
+		syllablesRemainingLine2 = 5;
+
+		noun2 = array[1];
+		syllablesRemainingLine2 = syllablesRemainingLine2 - noun2[1];
+
+		while(true){
+			var placeholder = adjectives[Math.floor(Math.random() * adjectives.length)];
+			if (placeholder[1] == (syllablesRemainingLine2)) {
+				adjective1 = placeholder;
+				break;
+			}
+		}
+
+		console.log("and ", noun2[0], " is ", adjective1[0]);
+
+		//start line 3
+		syllablesRemainingLine3 = 3;
+
+		while(true){
+			var placeholder = adjectives[Math.floor(Math.random() * adjectives.length)];
+			if (placeholder[1] == (syllablesRemainingLine3)) {
+				adjective2 = placeholder;
+				break;
+			}
+		}	
+		console.log("who is ", adjective2[0], "?")	
+
+		return "" + noun1[0] + " " + verb1[0] + " " + adverb1[0] + "\n" + "and " + noun2[0] + " is " + adjective1[0] + "\n" + "who is " + adjective2[0] + "?"; 
+
+
 	}
 }
 

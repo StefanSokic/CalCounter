@@ -23,62 +23,126 @@ function Haiku() {
 	var adjective2 = "";
 	var verb2 = "";
 	var adverb3 = "";
+	var noun3 = "";
+	var adverb1 = "";
+	var question1 = "";
+	var adjective3 = "";
+	var verb3 = "";
 
-	// generate the first line, syll count of 5
-	var syllablesRemainingLine1 = 5;
-	noun1 = array[0];
-	// decrement the syllable counter
-	syllablesRemainingLine1 = syllablesRemainingLine1 - noun1[1];
+		//start of first line
+		syllablesRemainingLine1 = 5;
+		
+		noun1 = array[0];
+		syllablesRemainingLine1 = syllablesRemainingLine1 - noun1[1];
+
+		while(true){
+			var placeholder = verbs[Math.floor(Math.random() * verbs.length)];
+			if (placeholder[1] == (syllablesRemainingLine1 - 3)) {
+				verb1 = placeholder;
+				break;
+			}
+		} 
+		syllablesRemainingLine1 = syllablesRemainingLine1 - verb1[1];
+
+		while(true){
+			var placeholder = adverbs[Math.floor(Math.random() * adverbs.length)];
+			if (placeholder[1] == (syllablesRemainingLine1)) {
+				adverb1 = placeholder;
+				break;
+			}
+		} 		
+
+		console.log(noun1[0], verb1[0], adverb1[0]);
+
+		// start on second line
+		syllablesRemainingLine2 = 5;
+
+		noun2 = array[1];
+		syllablesRemainingLine2 = syllablesRemainingLine2 - noun2[1];
+
+		while(true){
+			var placeholder = adjectives[Math.floor(Math.random() * adjectives.length)];
+			if (placeholder[1] == (syllablesRemainingLine2)) {
+				adjective1 = placeholder;
+				break;
+			}
+		}
+
+		console.log("and ", noun2[0], " is ", adjective1[0]);
+
+		//start line 3
+		syllablesRemainingLine3 = 3;
+
+		while(true){
+			var placeholder = adjectives[Math.floor(Math.random() * adjectives.length)];
+			if (placeholder[1] == (syllablesRemainingLine3)) {
+				adjective2 = placeholder;
+				break;
+			}
+		}	
+		console.log("who is ", adjective2[0], "?")	
+
+		
+
+
+		//return "" + noun1[0] + " " + verb1[0] + " " + adverb1[0] + "\n" + "and " + noun2[0] + " is " + adjective1[0] 
+
+
+	// // generate the first line, syll count of 5
+	// var syllablesRemainingLine1 = 5;
+	// noun1 = array[0];
+	// // decrement the syllable counter
+	// syllablesRemainingLine1 = syllablesRemainingLine1 - noun1[1];
 	
-	while(true){
-		var placeholder = adjectives[Math.floor(Math.random() * adjectives.length)];
-		if (placeholder[1] == syllablesRemainingLine1) {
-			adjective1 = placeholder;
-			break;
-		}
-	}
-	console.log(adjective1[0], noun1[0]);
+	// while(true){
+	// 	var placeholder = adjectives[Math.floor(Math.random() * adjectives.length)];
+	// 	if (placeholder[1] == syllablesRemainingLine1) {
+	// 		adjective1 = placeholder;
+	// 		break;
+	// 	}
+	// }
+	// console.log(adjective1[0], noun1[0]);
 
-	//generage the second line, syll count of 7
-	syllablesRemainingLine2 = 7;
+	// //generage the second line, syll count of 7
+	// syllablesRemainingLine2 = 7;
 
-	noun2 = array[1];
-	syllablesRemainingLine2 = syllablesRemainingLine2 - noun2[1];
+	// noun2 = array[1];
+	// syllablesRemainingLine2 = syllablesRemainingLine2 - noun2[1];
 
-	preposition2 = prepositions[Math.floor(Math.random() * prepositions.length)];
-	syllablesRemainingLine2 = syllablesRemainingLine2 - preposition2[1];
+	// preposition2 = prepositions[Math.floor(Math.random() * prepositions.length)];
+	// syllablesRemainingLine2 = syllablesRemainingLine2 - preposition2[1];
 	
-	while(true){
-		var placeholder = adjectives[Math.floor(Math.random() * adjectives.length)];
-		if ((placeholder[1] <= (syllablesRemainingLine2 - 2)) && (placeholder != adjective1) ) {
-			adjective2 = placeholder;
-			break;
-		}
-	}
-	syllablesRemainingLine2 = syllablesRemainingLine2 - adjective2[1];
+	// while(true){
+	// 	var placeholder = adjectives[Math.floor(Math.random() * adjectives.length)];
+	// 	if ((placeholder[1] <= (syllablesRemainingLine2 - 2)) && (placeholder != adjective1) ) {
+	// 		adjective2 = placeholder;
+	// 		break;
+	// 	}
+	// }
+	// syllablesRemainingLine2 = syllablesRemainingLine2 - adjective2[1];
 
-	while(true){
-		var placeholder = verbs[Math.floor(Math.random() * verbs.length)];
-		if (placeholder[1] == syllablesRemainingLine2) {
-			verb2 = placeholder;
-			break;
-		}
-	}
-	console.log(preposition2[0], adjective2[0], noun2[0], verb2[0]);
+	// while(true){
+	// 	var placeholder = verbs[Math.floor(Math.random() * verbs.length)];
+	// 	if (placeholder[1] == syllablesRemainingLine2) {
+	// 		verb2 = placeholder;
+	// 		break;
+	// 	}
+	// }
+	// console.log(preposition2[0], adjective2[0], noun2[0], verb2[0]);
 
-	//generate the thrid line, syll count of 5
-	syllablesRemainingLine3 = 5;
-	adverb3 = adverbs[Math.floor(Math.random() * adverbs.length)];
-	syllablesRemainingLine3 = syllablesRemainingLine3 - adverb3[1];
+	// //generate the thrid line, syll count of 5
+	// syllablesRemainingLine3 = 5;
+	// adverb3 = adverbs[Math.floor(Math.random() * adverbs.length)];
+	// syllablesRemainingLine3 = syllablesRemainingLine3 - adverb3[1];
 
-	while(true){
-		var placeholder = verbs[Math.floor(Math.random() * verbs.length)];
-		if (placeholder[1] == syllablesRemainingLine3) {
-			verb3 = placeholder;
-			break;
-		}
-	}
-	console.log(verb3[0], adverb3[0]);
+	// while(true){
+	// 	var placeholder = verbs[Math.floor(Math.random() * verbs.length)];
+	// 	if (placeholder[1] == syllablesRemainingLine3) {
+	// 		verb3 = placeholder;
+	// 		break;
+	// 	}
+	// }
+	// console.log(verb3[0], adverb3[0]);
 
 
 }
