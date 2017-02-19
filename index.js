@@ -208,6 +208,8 @@ function generateHaiku(sender, array) {
 
 		return "" + adjective1[0] + " " + noun1[0] + "\n" + preposition2[0] + " " + adjective2[0] + " " + noun2[0] + " " + verb2[0] + "\n" + noun3[0] + " " + verb3[0];
 	}
+
+
 	function haiku2(sender, array) {
 		console.log("haiku 2 bad");
 		//start of first line
@@ -252,7 +254,10 @@ function generateHaiku(sender, array) {
 		console.log("and ", noun2[0], " is ", adjective1[0]);
 
 		//start line 3
-		syllablesRemainingLine3 = 3;
+		syllablesRemainingLine3 = 4;
+
+		noun3 = array[2];
+		syllablesRemainingLine3 = syllablesRemainingLine3 - noun3[1];
 
 		while(true){
 			var placeholder = adjectives[Math.floor(Math.random() * adjectives.length)];
@@ -261,9 +266,9 @@ function generateHaiku(sender, array) {
 				break;
 			}
 		}	
-		console.log("who is ", adjective2[0], "?")	
+		console.log(noun3[0], "is ", adjective2[0], "?")	
 
-		return "" + noun1[0] + " " + verb1[0] + " " + adverb1[0] + "\n" + "and " + noun2[0] + " is " + adjective1[0] + "\n" + "who is " + adjective2[0] + "?"; 
+		return "" + noun1[0] + " " + verb1[0] + " " + adverb1[0] + "\n" + "and " + noun2[0] + " is " + adjective1[0] + "\n" + noun3[0] + " is " + adjective2[0] + "?"; 
 
 
 	}
