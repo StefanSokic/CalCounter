@@ -146,6 +146,7 @@ function generateHaiku(sender, array) {
 	}
 
 	function haiku1(sender, array) { 
+		console.log("haiku 1 bad");
 		// generate the first line, syll count of 5
 		var syllablesRemainingLine1 = 5;
 		noun1 = array[0];
@@ -208,6 +209,7 @@ function generateHaiku(sender, array) {
 		return "" + adjective1[0] + " " + noun1[0] + "\n" + preposition2[0] + " " + adjective2[0] + " " + noun2[0] + " " + verb2[0] + "\n" + noun3[0] + " " + verb3[0];
 	}
 	function haiku2(sender, array) {
+		console.log("haiku 2 bad");
 		//start of first line
 		syllablesRemainingLine1 = 5;
 		
