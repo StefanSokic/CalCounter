@@ -4,50 +4,6 @@ var request = require('request')
 var app = express()
 
 app.set('port', (process.env.PORT || 5000))
-//--------------------------------------------------------------------------------------------------
-// set up the AWS database
-/*
- * Load the S3 information from the environment variables.
- */
-const S3_BUCKET = process.env.S3_BUCKET;
-
-var fs = require('fs');
-exports.upload = function (req, res) {
-    var file = req.files.file;
-    fs.readFile(file.path, function (err, data) {
-        if (err) throw err; // Something went wrong!
-        var s3bucket = new AWS.S3({params: {Bucket: 'deep-dream-image-db'}});
-        s3bucket.createBucket(function () {
-            var params = {
-                Key: file.originalFilename, //file.name doesn't exist as a property
-                Body: data
-            };
-            s3bucket.upload(params, function (err, data) {
-                // Whether there is an error or not, delete the temp file
-                fs.unlink(file.path, function (err) {
-                    if (err) {
-                        console.error(err);
-                    }
-                    console.log('Temp File Delete');
-                });
-
-                console.log("PRINT FILE:", file);
-                if (err) {
-                    console.log('ERROR MSG: ', err);
-                    res.status(500).send(err);
-                } else {
-                    console.log('Successfully uploaded data');
-                    res.status(200).end();
-                }
-            });
-        });
-    });
-};
-
-//---------------------------------------------------------------------------------------------------
-
-
-
 
 // Process application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}))
@@ -90,12 +46,12 @@ app.post('/webhook/', function (req, res) {
    		//used for outputting text right now
 		else if (event.message && event.message.text) {
 			text = event.message.text
-			sendTextMessage(sender, text + " I can has so many dreams woa") //text.substring(0, 200))
+			sendTextMessage(sender, text + " I can has so many poems woa") //text.substring(0, 200))
 		}
 	}
 	res.sendStatus(200)
 })
-var token = "EAAH4wv1b3eIBAJUaSIMMSe9OlrO6vUyCFYpIHtLBNEkeltAGSQlGBXlZCOOOL8Ezeq1nWbEQZBeO2TDto8QBFjpiYpqTaw10EmuBLOZCyRMmlxXcfuQMaZAaAGLiEI6UUpblQzQpSKaTPZAzguLB42mylR1mp0u6cSUODQEPdrgZDZD"
+var token = "EAAH4wv1b3eIBAKQzcA9ZAafSz6UJBi5FdNnMPPsKPBmEVSH9ijU9tXZAPc6aqsHrXRsmZBoZAbuc7jIkPnVkL93AseFSqj0SfE6edxzEhhvNHtemJaduleqPkXtLg7iJ5O0v5dAOBTE0QmfQNDt93KkWzMUpDKZAr19ZAx6r3XdgZDZD"
 
 //Adding function to echo back messages
 function sendTextMessage(sender, text) {
@@ -121,7 +77,6 @@ function sendTextMessage(sender, text) {
 
 //Adding function to echo back images
 function sendImageMessage(sender, imageURL) {
-	imageURL = upload(imageURL)
 	messageData = {
 		"attachment":{
       		"type":"image",
