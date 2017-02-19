@@ -173,7 +173,7 @@ function generateHaiku(sender, array) {
 		
 		while(true){
 			var placeholder = adjectives[Math.floor(Math.random() * adjectives.length)];
-			if ((placeholder[1] <= (syllablesRemainingLine2 - 2)) && (placeholder != adjective1) ) {
+			if ((placeholder[1] <= (syllablesRemainingLine2 - 1)) && (placeholder != adjective1) ) {
 				adjective2 = placeholder;
 				break;
 			}
