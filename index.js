@@ -56,7 +56,7 @@ var token = "EAAH4wv1b3eIBAKQzcA9ZAafSz6UJBi5FdNnMPPsKPBmEVSH9ijU9tXZAPc6aqsHrXR
 //Adding function to echo back messages
 function sendTextMessage(sender, text) {
 	messageData = {
-		text:text
+		text: "woo" + text
 	}
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -74,7 +74,7 @@ function sendTextMessage(sender, text) {
 			}
 	})
 }
-
+/*
 //Adding function to echo back images
 function sendImageMessage(sender, imageURL) {
 	messageData = {
@@ -101,7 +101,7 @@ function sendImageMessage(sender, imageURL) {
 			}
 	})
 }
-
+*/
 function analyzePicture(sender, url) {
 	//Require the client
 	var Clarifai = require('clarifai');
