@@ -46,7 +46,7 @@ app.post('/webhook/', function (req, res) {
    		//used for outputting text right now
 		else if (event.message && event.message.text) {
 			text = event.message.text
-			sendTextMessage(sender, text + " I can has so many poems woa") //text.substring(0, 200))
+			sendTextMessage(sender, text + " I have poems for you") //text.substring(0, 200))
 		}
 	}
 	res.sendStatus(200)
