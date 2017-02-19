@@ -22,7 +22,7 @@ exports.upload = function (req, res) {
                 Key: file.originalFilename, //file.name doesn't exist as a property
                 Body: data
             };
-            s3bucket.upload(params, function (err,  {
+            s3bucket.upload(params, function (err, data) {
                 // Whether there is an error or not, delete the temp file
                 fs.unlink(file.path, function (err) {
                     if (err) {
@@ -121,6 +121,7 @@ function sendTextMessage(sender, text) {
 
 //Adding function to echo back images
 function sendImageMessage(sender, imageURL) {
+	upload(imageURL)
 	messageData = {
 		"attachment":{
       		"type":"image",
