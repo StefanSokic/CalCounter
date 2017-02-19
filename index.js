@@ -1,6 +1,7 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 var request = require('request')
+var syllable = require('syllable');
 var app = express()
 
 app.set('port', (process.env.PORT || 5000))
@@ -51,6 +52,7 @@ app.post('/webhook/', function (req, res) {
 	}
 	res.sendStatus(200)
 })
+
 var token = "EAAH4wv1b3eIBAKQzcA9ZAafSz6UJBi5FdNnMPPsKPBmEVSH9ijU9tXZAPc6aqsHrXRsmZBoZAbuc7jIkPnVkL93AseFSqj0SfE6edxzEhhvNHtemJaduleqPkXtLg7iJ5O0v5dAOBTE0QmfQNDt93KkWzMUpDKZAr19ZAx6r3XdgZDZD"
 
 //Adding function to echo back messages
@@ -79,7 +81,6 @@ function analyzePicture(sender, url) {
 	//Require the client
 	var Clarifai = require('clarifai');
 
-	// instantiate a new Clarifai app passing in your clientId and clientSecret
 	var app = new Clarifai.App(
 		'4-xM5EbfrWiqnMl6GBd7GYAj7dsT1q56sc-y_qu_',
 		'_mwAiy80BDc5vlifDVArYwMKEcOlcvT1aCOe9zqH'
@@ -87,11 +88,15 @@ function analyzePicture(sender, url) {
 	// predict the contents of an image by passing in a url
 	app.models.predict(Clarifai.GENERAL_MODEL, url).then(
   	function(response) {
-  		for (var i = 0; i < 5; i++) {
+  		var wordArray =[];
+  		var i = 0;
+  		while (wordArray.length < 5) {
   			if (response.outputs[0].data.concepts[i].name != "no person") {
-				sendTextMessage(sender, "I see a " + response.outputs[0].data.concepts[i].name); //.outputs[0].data
+				wordArray.append([response.outputs[0].data.concepts[i].name, syllable(response.outputs[0].data.concepts[i].name)])
   			}
+  			i++;
   		}
+  		sendTextMessage(sender, "I see a " + wordArray);
   	},
   	function(err) {
     	console.error(err);
