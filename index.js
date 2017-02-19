@@ -110,10 +110,10 @@ function generateHaiku(sender, array) {
 	// array is a 2d array. Each inner array conatins the world followed by the amount of syllables
 
 	// generate all word arrays------------------
-	adjectives = create2dArray(adjectivesList = ["abandoned", "advanced", "blank", "blue", "devillishly", "cloudy", "sad", "meatiest", "cooler", "interesting", "identical", "ill", "right", "wrong", "fun", "conservative", "mushiest", "chunkier", "funkiest"]);
+	adjectives = create2dArray(adjectivesList = ["abandoned", "advanced", "blank", "blue", "devillishly", "cloudy", "sad", "meatiest", "cooler", "interesting", "identical", "ill", "right", "wrong", "fun", "conservative", "mushiest", "chunkier", "funkiest", "silly", "slobbery", "naughty", "glorious", "deficient", "incompetent", "benevolent", "wise", "damp", "mini", "dense", "early", "groggy","hip", "radical", "vestigal"]);
 	adverbs = create2dArray(adverbsList =["financially", "willfuly", "firmly", "immensely", "truthfully", "quickly", "rarely", "best", "honestly"]);
 	pronouns = create2dArray(pronounsList = ["I", "you", "it", "they", "he", "she"]);
-	verbs = create2dArray(verbsList = ["as", "is", "celebrating", "congratulates", "minimizes", "sandwiches", "vocalize", "murdering", "was", "has", "got", "made", "said", "took", "jumping", "crying", "hugging", "screaming"]);
+	verbs = create2dArray(verbsList = ["as", "is", "celebrating", "congratulates", "minimizes", "vocalize", "murdering", "carressing", "was", "has", "got", "made", "said", "took", "jumping", "crying", "hugging", "screaming", "consoling", "traumatizing", "concentrates", "highlights", "enunciates", "muttering", "cuddling", "whispers", "cry", "dug", "munches", "boogieing", "mingles", "boasts", "perishes"]);
 	questionWords = create2dArray(questionWordsList = ["who", "what", "when", "where", "why"]);
 	prepositions = create2dArray(prepositionsList = ["the", "a", "that", "this", "is", "her", "an", "his"]);
 
@@ -133,6 +133,7 @@ function generateHaiku(sender, array) {
 	var adjective2 = "";
 	var verb2 = "";
 	var adverb3 = "";
+	var noun3 = "";
 
 	// generate the first line, syll count of 5
 	var syllablesRemainingLine1 = 5;
@@ -178,8 +179,11 @@ function generateHaiku(sender, array) {
 
 	//generate the thrid line, syll count of 5
 	syllablesRemainingLine3 = 5;
-	adverb3 = adverbs[Math.floor(Math.random() * adverbs.length)];
-	syllablesRemainingLine3 = syllablesRemainingLine3 - adverb3[1];
+	//adverb3 = adverbs[Math.floor(Math.random() * adverbs.length)];
+	//syllablesRemainingLine3 = syllablesRemainingLine3 - adverb3[1];
+	noun3 = array[2];
+	syllablesRemainingLine3 = syllablesRemainingLine3 - noun3[1];
+
 
 	while(true){
 		var placeholder = verbs[Math.floor(Math.random() * verbs.length)];
@@ -188,8 +192,8 @@ function generateHaiku(sender, array) {
 			break;
 		}
 	}
-	console.log(verb3[0], adverb3[0]);
+	console.log(noun3[0], verb3[0]);
 
-	return "" + adjective1[0] + " " + noun1[0] + "\n" + preposition2[0] + " " + adjective2[0] + " " + noun2[0] + " " + verb2[0] + "\n" + verb3[0] + " " + adverb3[0];
+	return "" + adjective1[0] + " " + noun1[0] + "\n" + preposition2[0] + " " + adjective2[0] + " " + noun2[0] + " " + verb2[0] + "\n" + noun3[0] + " " + verb3[0];
 }
 
