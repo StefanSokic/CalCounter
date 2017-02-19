@@ -93,12 +93,17 @@ function analyzePicture(sender, url) {
   	function(response) {
   		var wordArray =[];
   		var i = 0;
-  		while (i < 3) {
+  		var j = 0;
+  		while (j < 10) {
+  			if (i == 3) {
+  				break;
+  			}
   			if (response.outputs[0].data.concepts[i].name != "no person") {
 				//wordArray.append([response.outputs[0].data.concepts[i].name, syllable(response.outputs[0].data.concepts[i].name)])
   				sendTextMessage(sender, "I see a " + response.outputs[0].data.concepts[i].name);
   				i++;
   			}
+  			j++;
   		}
   		//sendTextMessage(sender, "I see a " + wordArray[0]);
   		/*
