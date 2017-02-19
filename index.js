@@ -91,19 +91,12 @@ function analyzePicture(sender, url) {
 	// predict the contents of an image by passing in a url
 	app.models.predict(Clarifai.GENERAL_MODEL, url).then(
   	function(response) {
-  		var wordArray =[];
-  		var i = 0;
-  		var j = 0;
-  		while (j < 10) {
-  			if (i == 3) {
-  				break;
+  			var wordArray =[];
+  			for (var i = 0; i < 5; i++) {
+  				if (response.outputs[0].data.concepts[i].name != "no person"){
+  					sendTextMessage(sender, "I see a " + response.outputs[0].data.concepts[i].name);
+  				}
   			}
-  			if (response.outputs[0].data.concepts[i].name != "no person") {
-				//wordArray.append([response.outputs[0].data.concepts[i].name, syllable(response.outputs[0].data.concepts[i].name)])
-  				sendTextMessage(sender, "I see a " + response.outputs[0].data.concepts[i].name);
-  				i++;
-  			}
-  			j++;
   		}
   		//sendTextMessage(sender, "I see a " + wordArray[0]);
   		/*
