@@ -139,7 +139,7 @@ function generateHaiku(sender, array) {
 	var adjective3 = "";
 	var verb3 = "";
 
-	if (Math.floor(Math.random() == 0)) {
+	if (Math.floor(Math.random()*(1-0+1)+0)) {
 		return haiku1(sender, array);
 	} else {
 		return haiku2(sender, array);
