@@ -87,9 +87,11 @@ function analyzePicture(sender, url) {
 	// predict the contents of an image by passing in a url
 	app.models.predict(Clarifai.GENERAL_MODEL, url).then(
   	function(response) {
-  		for (i in range(10))
-  			if response.outputs[0].data.concepts[i].name != "no person"
+  		for (var i = 0; i < 5; i++) {
+  			if (response.outputs[0].data.concepts[i].name != "no person") {
 				sendTextMessage(sender, "I see a " + response.outputs[0].data.concepts[i].name); //.outputs[0].data
+  			}
+  		}
   	},
   	function(err) {
     	console.error(err);
