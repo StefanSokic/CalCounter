@@ -40,7 +40,7 @@ app.post('/webhook/', function (req, res) {
     		//Checking if there are any image attachments 
     		if(event.message.attachments[0].type === "image"){
      			var imageURL = event.message.attachments[0].payload.url;
-     			sendImageMessage(sender, imageURL)
+     			analyzePicture(sender, imageURL);
     		}
    		}
    		//used for outputting text right now
@@ -100,5 +100,25 @@ function sendImageMessage(sender, imageURL) {
 				console.log('Error: ', response.body.error)
 			}
 	})
+}
+
+function analyzePicture(sender, url) {
+	//Require the client
+	var Clarifai = require('clarifai');
+
+	// instantiate a new Clarifai app passing in your clientId and clientSecret
+	var app = new Clarifai.App(
+		'4-xM5EbfrWiqnMl6GBd7GYAj7dsT1q56sc-y_qu_',
+		'_mwAiy80BDc5vlifDVArYwMKEcOlcvT1aCOe9zqH'
+		);
+	// predict the contents of an image by passing in a url
+	app.models.predict(Clarifai.GENERAL_MODEL, url).then(
+  	function(response) {
+    	sendTextMessage(sender, response.outputs[0].data); //.outputs[0].data
+  	},
+  	function(err) {
+    	console.error(err);
+  	}
+	);
 }
 
