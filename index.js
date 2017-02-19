@@ -135,8 +135,8 @@ function generateHaiku(sender, array) {
 	var adverb3 = "";
 	var noun3 = "";
 
-	
-	haiku1(sender, array);
+
+	return haiku1(sender, array);
 
 	function haiku1(sender, array) { 
 		// generate the first line, syll count of 5
