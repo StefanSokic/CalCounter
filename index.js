@@ -97,7 +97,7 @@ function analyzePicture(sender, url) {
   				wordArray.push([response.outputs[0].data.concepts[i].name, syllable(response.outputs[0].data.concepts[i].name)]);
   			}
   		}
-  		sendTextMessage(sender, generateHaiku(sender, wordArray););
+  		sendTextMessage(sender, generateHaiku(sender, wordArray));
   		//sendTextMessage(sender, "I see a " + response.outputs[0].data.concepts[i].name);
   		/*
   		py.stdout.on('data', function(data){
@@ -121,18 +121,17 @@ function generateHaiku(sender, array) {
 	// array is a 2d array. Each inner array conatins the world followed by the amount of syllables
 
 	// generate all word arrays------------------
-	adjectives = create2dArray(adjectivesList = []);
-	adverbs = create2dArray(adverbsList =[]);
-	pronouns = create2dArray(pronounsList = []);
-	verbs = create2dArray(verbsList = []);
-	questionWords = create2dArray(questionWordsList = []);
-	prepositions = create2dArray(prepositionsList = []);
-	nouns = create2dArray(nounsList = []);
+	adjectives = create2dArray(adjectivesList = ["abandoned", "advanced", "blank", "blue", "devillishly", "cloudy", "sad", "meatiest", "cooler", "interesting", "identical", "ill", "right", "wrong", "fun", "conservative", "mushiest", "chunkier", "funkiest"]);
+	adverbs = create2dArray(adverbsList =["financially", "willfuly", "firmly", "immensely", "truthfully", "quickly", "rarely", "best", "honestly"]);
+	pronouns = create2dArray(pronounsList = ["I", "you", "it", "they", "he", "she"]);
+	verbs = create2dArray(verbsList = ["as", "is", "celebrating", "congratulates", "minimizes", "sandwiches", "vocalize", "murdering", "was", "has", "got", "made", "said", "took", "jumping", "crying", "hugging", "screaming"]);
+	questionWords = create2dArray(questionWordsList = ["who", "what", "when", "where", "why"]);
+	prepositions = create2dArray(prepositionsList = ["the", "a", "that", "this", "is", "her", "an", "his"]);
 
 	function create2dArray(list) {
 		newArray = [];
 		for (var i = 0; i < list.length; i++) {
-		newArray.push([list[i], syllable(list[i])])
+			newArray.push([list[i], syllable(list[i])]);
 		}
 		return newArray;
 	}
