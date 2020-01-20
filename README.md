@@ -1,5 +1,4 @@
 # HaikuBot
-### Talk to HaikuBot [here](http://m.me/thehaikubot)
 Built with a teammate at Hack NYU. We think that framing the world around in the form of the three-lined haiku offers a glorious new perspective on our surroundings as well as provoking meaningful and stimulating lines of thought.  
 
 ## What it does  
